@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.subjects.create.CreateSubjectFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            style="@style/ActionBar"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/ItemActionBar.Title"
+                android:text="@string/create_subject" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/subjectName"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:hint="@string/subject_name"
+            app:layout_constraintBottom_toTopOf="@id/subjectCreate"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout" />
+
+        <Button
+            android:id="@+id/subjectCreate"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:text="@string/subject_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subjectName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

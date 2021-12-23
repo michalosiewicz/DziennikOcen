@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">Asystent nauczyciela</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="students">Studenci</string>
+    <string name="subjects">Przedmioty</string>
+    <string name="create_student">Dodaj Studenta</string>
+    <string name="create_subject">Dodaj Przedmiot</string>
+    <string name="student_name">Imię</string>
+    <string name="student_second_name">Nazwisko</string>
+    <string name="student_number">Numer albumu</string>
+    <string name="student_add">Dodaj studenta</string>
+    <string name="subject_name">Nazwa</string>
+    <string name="subject_add">Dodaj przedmiot</string>
+
+</resources>

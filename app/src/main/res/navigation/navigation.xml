@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.mo.dziennikocen.ui.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_subjectsFragment"
+            app:destination="@id/subjectsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_studentsFragment"
+            app:destination="@id/studentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectsFragment"
+        android:name="com.mo.dziennikocen.ui.subjects.SubjectsFragment"
+        android:label="SubjectsFragment" >
+        <action
+            android:id="@+id/action_subjectsFragment_to_createSubjectFragment"
+            app:destination="@id/createSubjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentsFragment"
+        android:name="com.mo.dziennikocen.ui.students.StudentsFragment"
+        android:label="StudentsFragment" >
+        <action
+            android:id="@+id/action_studentsFragment_to_createStudentFragment"
+            app:destination="@id/createStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudentFragment"
+        android:name="com.mo.dziennikocen.ui.students.create.CreateStudentFragment"
+        android:label="fragment_create_student"
+        tools:layout="@layout/fragment_create_student" />
+    <fragment
+        android:id="@+id/createSubjectFragment"
+        android:name="com.mo.dziennikocen.ui.subjects.create.CreateSubjectFragment"
+        android:label="fragment_create_subject"
+        tools:layout="@layout/fragment_create_subject" />
+</navigation>
