@@ -11,12 +11,12 @@
             type="com.mo.dziennikocen.ui.students.create.CreateStudentViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/relativeLayout"
             style="@style/ActionBar"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -28,10 +28,9 @@
         </RelativeLayout>
 
         <ScrollView
-            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/relativeLayout">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,35 +41,38 @@
                     android:id="@+id/studentName"
                     style="@style/EditText"
                     android:layout_width="match_parent"
-                    android:layout_marginVertical="48dp"
-                    android:hint="@string/student_name" />
+                    android:layout_marginVertical="80dp"
+                    android:hint="@string/student_name"
+                    android:inputType="text" />
 
                 <EditText
                     android:id="@+id/studentSecondName"
                     style="@style/EditText"
                     android:layout_width="match_parent"
-                    android:layout_marginVertical="48dp"
-                    android:hint="@string/student_second_name" />
+                    android:layout_marginBottom="80dp"
+                    android:hint="@string/student_second_name"
+                    android:inputType="text" />
 
                 <EditText
                     android:id="@+id/studentNumber"
                     style="@style/EditText"
                     android:layout_width="match_parent"
-                    android:layout_marginVertical="48dp"
-                    android:hint="@string/student_number" />
+                    android:layout_marginBottom="80dp"
+                    android:hint="@string/student_number"
+                    android:inputType="phone" />
 
                 <Button
                     android:id="@+id/studentCreate"
                     style="@style/Button"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="80dp"
                     android:enabled="@{viewModel.areInputsCorrect}"
-                    android:text="@string/student_add"
-                    android:layout_marginVertical="48dp" />
+                    android:text="@string/student_add" />
 
             </LinearLayout>
 
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

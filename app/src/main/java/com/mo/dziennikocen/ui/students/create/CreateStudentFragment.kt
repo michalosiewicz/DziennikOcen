@@ -23,9 +23,8 @@ class CreateStudentFragment : Fragment() {
             inflater, R.layout.fragment_create_student, container, false
         )
         return binding.apply {
-                viewModel=this@CreateStudentFragment.viewModel
-                lifecycleOwner = viewLifecycleOwner
+            viewModel = this@CreateStudentFragment.viewModel
+            lifecycleOwner = viewLifecycleOwner
         }.root
     }
-
 }
