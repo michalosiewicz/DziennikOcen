@@ -16,6 +16,8 @@
     <string name="subject_time">10:00–12:30</string>
     <string name="term_classes">Termin zajęć</string>
     <string name="dash">-</string>
+    <string name="subject_name_info">Podaj nazwę przedmiotu</string>
+    <string name="subject_time_info">Godziny muszą się od siebie różnić</string>
 
     <string-array name="days_of_week">
         <item>Poniedziałek</item>
