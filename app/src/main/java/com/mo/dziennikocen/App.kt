@@ -1,8 +1,9 @@
 package com.mo.dziennikocen
 
 import android.app.Application
+import com.mo.data.di.dataModules
+import com.mo.domain.di.domainModules
 import com.mo.dziennikocen.di.appModules
-import com.mo.dziennikocen.domain.di.domainModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -12,7 +13,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(appModules + domainModules)
+            modules(appModules + domainModules + dataModules)
         }
     }
 }

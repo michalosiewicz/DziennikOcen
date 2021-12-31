@@ -42,9 +42,5 @@ class CreateSubjectFragment : Fragment() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.daysSpinner.adapter = adapter
-        binding.timePickerStart.hour = 0
-        binding.timePickerStart.minute = 0
-        binding.timePickerEnd.hour = 0
-        binding.timePickerEnd.minute = 0
     }
 }

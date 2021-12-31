@@ -8,10 +8,10 @@ import org.koin.dsl.module
 val viewModelsModule = module {
 
     viewModel {
-        CreateStudentViewModel()
+        CreateStudentViewModel(get(), get(), get(), get())
     }
 
     viewModel {
-        CreateSubjectViewModel(get())
+        CreateSubjectViewModel(get(), get())
     }
 }

@@ -18,6 +18,9 @@
     <string name="dash">-</string>
     <string name="subject_name_info">Podaj nazwę przedmiotu</string>
     <string name="subject_time_info">Godziny muszą się od siebie różnić</string>
+    <string name="student_name_info">Podaj imię studenta</string>
+    <string name="student_second_name_info">Podaj nazwisko studenta</string>
+    <string name="student_number_info">Numer albumu powinien składać się z 6 cyfr</string>
 
     <string-array name="days_of_week">
         <item>Poniedziałek</item>

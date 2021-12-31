@@ -43,17 +43,18 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="40dp"
                     android:layout_marginBottom="8dp"
+                    android:autofillHints="name"
                     android:hint="@string/subject_name"
                     android:inputType="textCapSentences"
                     android:text="@={viewModel.subjectName}" />
 
                 <TextView
-                    android:id="@+id/test"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginBottom="40dp"
                     android:text="@string/subject_name_info"
+                    android:textColor="@color/red"
                     android:textStyle="italic"
                     android:visibility="@{viewModel.subjectNameVisibility}" />
 
@@ -61,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="24dp"
                     android:text="@string/term_classes"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -80,6 +81,8 @@
                         android:id="@+id/timePickerStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:hour="@={viewModel.hourStart}"
+                        android:minute="@={viewModel.minuteStart}"
                         android:scaleX="0.8"
                         android:scaleY="0.8"
                         android:timePickerMode="spinner" />
@@ -98,6 +101,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:hour="@={viewModel.hourEnd}"
+                        android:minute="@={viewModel.minuteEnd}"
                         android:scaleX="0.8"
                         android:scaleY="0.8"
                         android:timePickerMode="spinner" />
@@ -110,7 +115,9 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginBottom="40dp"
                     android:text="@string/subject_time_info"
-                    android:textStyle="italic" />
+                    android:textColor="@color/red"
+                    android:textStyle="italic"
+                    android:visibility="@{viewModel.subjectTimesVisibility}" />
 
                 <Button
                     android:id="@+id/subjectCreate"
@@ -120,10 +127,7 @@
                     android:enabled="@{viewModel.areInputsCorrect}"
                     android:text="@string/subject_add"
                     app:layout_constraintBottom_toBottomOf="@id/scrollView" />
-
             </LinearLayout>
-
         </ScrollView>
-
     </LinearLayout>
 </layout>
