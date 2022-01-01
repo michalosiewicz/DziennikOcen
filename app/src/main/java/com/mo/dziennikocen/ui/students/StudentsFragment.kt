@@ -9,18 +9,27 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.mo.dziennikocen.R
 import com.mo.dziennikocen.databinding.FragmentStudentsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StudentsFragment : Fragment() {
 
+    private val studentsViewModel: StudentsViewModel by viewModel()
     private lateinit var binding: FragmentStudentsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_students, container, false)
-        return binding.root
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_students,
+            container,
+            false
+        )
+        return binding.apply {
+            viewModel = this@StudentsFragment.studentsViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

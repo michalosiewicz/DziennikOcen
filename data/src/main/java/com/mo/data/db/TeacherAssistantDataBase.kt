@@ -8,7 +8,7 @@ import com.mo.data.db.models.StudentEntity
 import com.mo.data.db.models.SubjectEntity
 
 @Database(
-    entities = [SubjectEntity::class, StudentEntity::class], version = 1
+    entities = [StudentEntity::class, SubjectEntity::class], version = 1
 )
 abstract class TeacherAssistantDataBase : RoomDatabase() {
 

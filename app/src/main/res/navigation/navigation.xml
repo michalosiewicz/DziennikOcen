@@ -37,7 +37,11 @@
         android:id="@+id/createStudentFragment"
         android:name="com.mo.dziennikocen.ui.students.create.CreateStudentFragment"
         android:label="fragment_create_student"
-        tools:layout="@layout/fragment_create_student" />
+        tools:layout="@layout/fragment_create_student" >
+        <action
+            android:id="@+id/action_createStudentFragment_to_studentsFragment"
+            app:destination="@id/studentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createSubjectFragment"
         android:name="com.mo.dziennikocen.ui.subjects.create.CreateSubjectFragment"

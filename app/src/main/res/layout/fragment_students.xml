@@ -4,11 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.menu.MenuFragment">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mo.dziennikocen.ui.students.StudentsViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             style="@style/ActionBar"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -23,5 +31,17 @@
                 android:src="@drawable/ic_baseline_person_add_24" />
 
         </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/studentRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adapter="@{viewModel.studentsAdapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.mo.dziennikocen.di.modules
 
+import com.mo.dziennikocen.ui.students.StudentsViewModel
 import com.mo.dziennikocen.ui.students.create.CreateStudentViewModel
 import com.mo.dziennikocen.ui.subjects.create.CreateSubjectViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -13,5 +14,9 @@ val viewModelsModule = module {
 
     viewModel {
         CreateSubjectViewModel(get(), get())
+    }
+
+    viewModel {
+        StudentsViewModel(get(), get())
     }
 }

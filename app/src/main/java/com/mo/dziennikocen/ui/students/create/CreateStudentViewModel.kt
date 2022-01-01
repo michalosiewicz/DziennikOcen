@@ -75,9 +75,9 @@ class CreateStudentViewModel(
 
     fun addStudent() {
         val student = Student(
+            studentNumber.value ?: EMPTY_STRING,
             studentName.value ?: EMPTY_STRING,
-            studentSecondName.value ?: EMPTY_STRING,
-            studentNumber.value ?: EMPTY_STRING
+            studentSecondName.value ?: EMPTY_STRING
         )
         viewModelScope.launch {
             addStudentToDBUseCase.invoke(student)
