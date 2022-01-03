@@ -2,17 +2,29 @@ package com.mo.dziennikocen.ui.subjects.create
 
 import android.view.View
 import androidx.lifecycle.*
-import com.mo.domain.models.Times
+import com.mo.data.models.State
+import com.mo.data.models.Subject
+import com.mo.data.models.Times
+import com.mo.domain.usecases.db.subject.AddSubjectToDBUseCase
 import com.mo.domain.usecases.validation.subject.ValidateSubjectNameUseCase
 import com.mo.domain.usecases.validation.subject.ValidateSubjectTimesUseCase
+import com.mo.dziennikocen.constants.Constants
+import com.mo.dziennikocen.constants.Constants.CORRECT_SUBJECT_ADD
 import com.mo.dziennikocen.constants.Constants.EMPTY_STRING
 import com.mo.dziennikocen.constants.Constants.TIME_START_VALUE
 import com.mo.dziennikocen.extensions.changeVisibility
 import com.mo.dziennikocen.extensions.result
+import com.mo.dziennikocen.mappers.StringToDayOfWeekMapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.time.DayOfWeek
+import java.time.LocalTime
 
 class CreateSubjectViewModel(
     private val validateSubjectNameUseCase: ValidateSubjectNameUseCase,
-    private val validateSubjectTimesUseCase: ValidateSubjectTimesUseCase
+    private val validateSubjectTimesUseCase: ValidateSubjectTimesUseCase,
+    private val addSubjectToDBUseCase: AddSubjectToDBUseCase,
+    private val stringToDayOfWeekMapper: StringToDayOfWeekMapper
 ) : ViewModel() {
 
     val subjectName = MutableLiveData(EMPTY_STRING)
@@ -24,6 +36,14 @@ class CreateSubjectViewModel(
     val minuteStart = MutableLiveData(TIME_START_VALUE)
     val hourEnd = MutableLiveData(TIME_START_VALUE)
     val minuteEnd = MutableLiveData(TIME_START_VALUE)
+
+    private val _createSubjectSuccess = MutableLiveData<String>()
+    val createSubjectSuccess: LiveData<String>
+        get() = _createSubjectSuccess
+
+    private val _createSubjectError = MutableLiveData<String>()
+    val createSubjectError: LiveData<String>
+        get() = _createSubjectError
 
     private val listOfTimesLiveData = listOf(
         hourStart,
@@ -58,21 +78,39 @@ class CreateSubjectViewModel(
     private fun areDifferentTimes(): Boolean {
         val result = validateSubjectTimesUseCase.invoke(
             Times(
-                hourStart.value ?: TIME_START_VALUE,
-                minuteStart.value ?: TIME_START_VALUE,
-                hourEnd.value ?: TIME_START_VALUE,
-                minuteEnd.value ?: TIME_START_VALUE
+                LocalTime.of(
+                    hourStart.value ?: TIME_START_VALUE,
+                    minuteStart.value ?: TIME_START_VALUE,
+                ),
+                LocalTime.of(
+                    hourEnd.value ?: TIME_START_VALUE,
+                    minuteEnd.value ?: TIME_START_VALUE,
+                )
             )
         ).result()
         subjectTimesVisibility.changeVisibility(result)
         return result
     }
 
-    private fun changeVisibility(visibility: MutableLiveData<Int>, isCorrect: Boolean) {
-        if (isCorrect) {
-            visibility.value = View.INVISIBLE
-        } else {
-            visibility.value = View.VISIBLE
+    fun addSubject(dayOfWeek: String) {
+        val subject = Subject(
+            subjectName.value ?: EMPTY_STRING,
+            stringToDayOfWeekMapper.map(dayOfWeek),
+            LocalTime.of(
+                hourStart.value ?: TIME_START_VALUE,
+                minuteStart.value ?: TIME_START_VALUE,
+            ),
+            LocalTime.of(
+                hourEnd.value ?: TIME_START_VALUE,
+                minuteEnd.value ?: TIME_START_VALUE,
+            )
+        )
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val response = addSubjectToDBUseCase.invoke(subject)) {
+                is State.Success -> _createSubjectSuccess.postValue(CORRECT_SUBJECT_ADD)
+                is State.Error -> _createSubjectError.postValue(response.message)
+                else -> _createSubjectError.postValue(com.mo.data.constants.Constants.UNKNOWN_ERROR)
+            }
         }
     }
 }

@@ -98,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginBottom="72dp"
                     android:enabled="@{viewModel.areInputsCorrect}"
+                    android:onClick="@{()->viewModel.addStudent()}"
                     android:text="@string/student_add" />
 
             </LinearLayout>

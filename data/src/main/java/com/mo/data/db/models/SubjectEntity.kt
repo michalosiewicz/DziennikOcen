@@ -8,6 +8,10 @@ import java.time.DayOfWeek
 data class SubjectEntity(
 
     @PrimaryKey
-    val subjectName: String,
-    val dayOfWeek: DayOfWeek
+    val name: String,
+    val dayOfWeek: DayOfWeek,
+    val hourStart: Int,
+    val minuteStart: Int,
+    val hourEnd: Int,
+    val minuteEnd: Int
 )

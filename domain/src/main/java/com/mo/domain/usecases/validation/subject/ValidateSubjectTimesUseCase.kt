@@ -1,7 +1,7 @@
 package com.mo.domain.usecases.validation.subject
 
-import com.mo.domain.models.State
-import com.mo.domain.models.Times
+import com.mo.data.models.State
+import com.mo.data.models.Times
 import com.mo.domain.usecases.ParameterizedUseCase
 import com.mo.domain.validation.validators.subject.SubjectTimesValidator
 
@@ -11,8 +11,6 @@ internal class ValidateSubjectTimesUseCaseImpl(
     private val subjectTimesValidator: SubjectTimesValidator
 ) : ValidateSubjectTimesUseCase {
 
-    override fun invoke(input: Times): State<Boolean> {
-        val result = subjectTimesValidator.validate(input)
-        return State.Success(result)
-    }
+    override fun invoke(input: Times): State<Boolean> =
+        State.Success(subjectTimesValidator.validate(input))
 }

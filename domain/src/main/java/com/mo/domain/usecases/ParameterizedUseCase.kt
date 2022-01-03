@@ -1,6 +1,6 @@
 package com.mo.domain.usecases
 
-import com.mo.domain.models.State
+import com.mo.data.models.State
 
 interface ParameterizedUseCase<TInput, TOutput> {
 

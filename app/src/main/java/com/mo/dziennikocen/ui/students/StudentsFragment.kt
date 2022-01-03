@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.mo.dziennikocen.R
@@ -26,6 +27,7 @@ class StudentsFragment : Fragment() {
             container,
             false
         )
+
         return binding.apply {
             viewModel = this@StudentsFragment.studentsViewModel
             lifecycleOwner = viewLifecycleOwner
@@ -34,6 +36,14 @@ class StudentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_studentsFragment_to_menuFragment)
+                }
+            })
 
         binding.addButton.setOnClickListener {
             findNavController().navigate(R.id.action_studentsFragment_to_createStudentFragment)

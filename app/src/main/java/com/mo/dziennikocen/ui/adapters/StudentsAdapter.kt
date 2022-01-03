@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mo.data.models.Student
-import com.mo.dziennikocen.databinding.ItemStudentBinding
+import com.mo.dziennikocen.databinding.ItemRecylerViewBinding
 
 class StudentsAdapter :
     RecyclerView.Adapter<StudentsAdapter.ViewHolder>() {
@@ -19,19 +19,19 @@ class StudentsAdapter :
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: ItemStudentBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemRecylerViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(student: Student) {
             val studentName = student.studentSecondName + " " + student.studentName
             val studentNumber = "Numer albumu : " + student.studentNumber
-            binding.studentName.text = studentName
-            binding.studentNumber.text = studentNumber
+            binding.firstText.text = studentName
+            binding.secondText.text = studentNumber
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemStudentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemRecylerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }

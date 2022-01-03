@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_subjectsFragment_to_createSubjectFragment"
             app:destination="@id/createSubjectFragment" />
+        <action
+            android:id="@+id/action_subjectsFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentsFragment"
@@ -32,6 +35,9 @@
         <action
             android:id="@+id/action_studentsFragment_to_createStudentFragment"
             app:destination="@id/createStudentFragment" />
+        <action
+            android:id="@+id/action_studentsFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
         android:id="@+id/createStudentFragment"
@@ -46,5 +52,9 @@
         android:id="@+id/createSubjectFragment"
         android:name="com.mo.dziennikocen.ui.subjects.create.CreateSubjectFragment"
         android:label="fragment_create_subject"
-        tools:layout="@layout/fragment_create_subject" />
+        tools:layout="@layout/fragment_create_subject" >
+        <action
+            android:id="@+id/action_createSubjectFragment_to_subjectsFragment"
+            app:destination="@id/subjectsFragment" />
+    </fragment>
 </navigation>

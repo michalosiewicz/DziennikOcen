@@ -5,16 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.mo.dziennikocen.R
 import com.mo.dziennikocen.databinding.FragmentCreateSubjectBinding
+import com.mo.dziennikocen.extensions.daysOfWeekAdapter
+import com.mo.dziennikocen.providers.snackbar.SnackBarProvider
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateSubjectFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateSubjectBinding
     private val viewModel: CreateSubjectViewModel by viewModel()
+    private val snackBarProvider: SnackBarProvider by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +39,23 @@ class CreateSubjectFragment : Fragment() {
         binding.timePickerStart.setIs24HourView(true)
         binding.timePickerEnd.setIs24HourView(true)
 
-        val adapter = ArrayAdapter.createFromResource(
-            requireActivity(),
-            R.array.days_of_week,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.daysSpinner.adapter = adapter
+        binding.daysSpinner.adapter = requireActivity().daysOfWeekAdapter()
+
+        binding.subjectCreate.setOnClickListener {
+            viewModel.addSubject(binding.daysSpinner.selectedItem.toString())
+        }
+
+        viewModel.createSubjectSuccess.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_createSubjectFragment_to_subjectsFragment)
+            activity?.let { activity ->
+                snackBarProvider.successSnackBar(it, activity)
+            }
+        }
+
+        viewModel.createSubjectError.observe(viewLifecycleOwner) {
+            activity?.let { activity ->
+                snackBarProvider.errorSnackBar(it, activity)
+            }
+        }
     }
 }

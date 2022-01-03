@@ -9,11 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.mo.dziennikocen.R
 import com.mo.dziennikocen.databinding.FragmentCreateStudentBinding
+import com.mo.dziennikocen.providers.snackbar.SnackBarProvider
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateStudentFragment : Fragment() {
 
     private val viewModel: CreateStudentViewModel by viewModel()
+    private val snackBarProvider: SnackBarProvider by inject()
     private lateinit var binding: FragmentCreateStudentBinding
 
     override fun onCreateView(
@@ -31,9 +34,17 @@ class CreateStudentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.studentCreate.setOnClickListener {
-            viewModel.addStudent()
+        viewModel.createStudentSuccess.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_createStudentFragment_to_studentsFragment)
+            activity?.let { activity ->
+                snackBarProvider.successSnackBar(it, activity)
+            }
+        }
+
+        viewModel.createStudentError.observe(viewLifecycleOwner) {
+            activity?.let { activity ->
+                snackBarProvider.errorSnackBar(it, activity)
+            }
         }
     }
 }

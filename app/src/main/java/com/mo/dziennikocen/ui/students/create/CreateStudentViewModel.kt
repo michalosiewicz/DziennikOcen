@@ -1,19 +1,20 @@
 package com.mo.dziennikocen.ui.students.create
 
 import android.view.View
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.mo.data.constants.Constants.UNKNOWN_ERROR
+import com.mo.data.models.State
 import com.mo.data.models.Student
 import com.mo.domain.usecases.db.student.AddStudentToDBUseCase
 import com.mo.domain.usecases.validation.student.ValidateStudentNameUseCase
 import com.mo.domain.usecases.validation.student.ValidateStudentNumberUseCase
 import com.mo.domain.usecases.validation.student.ValidateStudentSecondNameUseCase
+import com.mo.dziennikocen.R
+import com.mo.dziennikocen.constants.Constants.CORRECT_STUDENT_ADD
 import com.mo.dziennikocen.constants.Constants.EMPTY_STRING
 import com.mo.dziennikocen.extensions.changeVisibility
 import com.mo.dziennikocen.extensions.result
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class CreateStudentViewModel(
     private val validateStudentNameUseCase: ValidateStudentNameUseCase,
@@ -29,6 +30,14 @@ class CreateStudentViewModel(
     val studentNameVisibility = MutableLiveData(View.VISIBLE)
     val studentSecondNameVisibility = MutableLiveData(View.VISIBLE)
     val studentNumberVisibility = MutableLiveData(View.VISIBLE)
+
+    private val _createStudentSuccess = MutableLiveData<String>()
+    val createStudentSuccess: LiveData<String>
+        get() = _createStudentSuccess
+
+    private val _createStudentError = MutableLiveData<String>()
+    val createStudentError: LiveData<String>
+        get() = _createStudentError
 
     val areInputsCorrect = MediatorLiveData<Boolean>().apply {
         var isNameCorrect = false
@@ -79,8 +88,12 @@ class CreateStudentViewModel(
             studentName.value ?: EMPTY_STRING,
             studentSecondName.value ?: EMPTY_STRING
         )
-        viewModelScope.launch {
-            addStudentToDBUseCase.invoke(student)
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val response = addStudentToDBUseCase.invoke(student)) {
+                is State.Success -> _createStudentSuccess.postValue(CORRECT_STUDENT_ADD)
+                is State.Error -> _createStudentError.postValue(response.message)
+                else -> _createStudentError.postValue(UNKNOWN_ERROR)
+            }
         }
     }
 }
