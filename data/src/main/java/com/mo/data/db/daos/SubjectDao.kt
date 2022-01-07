@@ -14,4 +14,7 @@ interface SubjectDao {
 
     @Query("SELECT * FROM subjectentity")
     suspend fun getSubjects(): List<SubjectEntity>
+
+    @Query("SELECT * FROM subjectentity WHERE name = :subjectName")
+    suspend fun getSubject(subjectName: String): SubjectEntity
 }

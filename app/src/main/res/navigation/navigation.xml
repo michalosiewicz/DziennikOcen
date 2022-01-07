@@ -9,7 +9,7 @@
         android:id="@+id/menuFragment"
         android:name="com.mo.dziennikocen.ui.menu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_subjectsFragment"
             app:destination="@id/subjectsFragment" />
@@ -20,18 +20,21 @@
     <fragment
         android:id="@+id/subjectsFragment"
         android:name="com.mo.dziennikocen.ui.subjects.SubjectsFragment"
-        android:label="SubjectsFragment" >
+        android:label="SubjectsFragment">
         <action
             android:id="@+id/action_subjectsFragment_to_createSubjectFragment"
             app:destination="@id/createSubjectFragment" />
         <action
             android:id="@+id/action_subjectsFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_subjectsFragment_to_subjectDetailsFragment"
+            app:destination="@id/subjectDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentsFragment"
         android:name="com.mo.dziennikocen.ui.students.StudentsFragment"
-        android:label="StudentsFragment" >
+        android:label="StudentsFragment">
         <action
             android:id="@+id/action_studentsFragment_to_createStudentFragment"
             app:destination="@id/createStudentFragment" />
@@ -43,7 +46,7 @@
         android:id="@+id/createStudentFragment"
         android:name="com.mo.dziennikocen.ui.students.create.CreateStudentFragment"
         android:label="fragment_create_student"
-        tools:layout="@layout/fragment_create_student" >
+        tools:layout="@layout/fragment_create_student">
         <action
             android:id="@+id/action_createStudentFragment_to_studentsFragment"
             app:destination="@id/studentsFragment" />
@@ -52,9 +55,23 @@
         android:id="@+id/createSubjectFragment"
         android:name="com.mo.dziennikocen.ui.subjects.create.CreateSubjectFragment"
         android:label="fragment_create_subject"
-        tools:layout="@layout/fragment_create_subject" >
+        tools:layout="@layout/fragment_create_subject">
         <action
             android:id="@+id/action_createSubjectFragment_to_subjectsFragment"
             app:destination="@id/subjectsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/subjectDetailsFragment"
+        android:name="com.mo.dziennikocen.ui.subjects.details.SubjectDetailsFragment"
+        android:label="fragment_subject_details"
+        tools:layout="@layout/fragment_subject_details">
+        <action
+            android:id="@+id/action_subjectDetailsFragment_to_addStudentsToSubjectFragment"
+            app:destination="@id/addStudentsToSubjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudentsToSubjectFragment"
+        android:name="com.mo.dziennikocen.ui.subjects.addstudents.AddStudentsToSubjectFragment"
+        android:label="fragment_add_students_to_subject"
+        tools:layout="@layout/fragment_add_students_to_subject" />
 </navigation>

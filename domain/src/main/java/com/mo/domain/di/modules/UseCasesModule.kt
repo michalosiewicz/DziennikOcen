@@ -4,9 +4,10 @@ import com.mo.domain.usecases.db.student.AddStudentToDBUseCase
 import com.mo.domain.usecases.db.student.AddStudentToDBUseCaseImpl
 import com.mo.domain.usecases.db.student.GetStudentsFromDBUseCase
 import com.mo.domain.usecases.db.student.GetStudentsFromDBUseCaseImpl
-import com.mo.domain.usecases.db.subject.AddSubjectToDBUseCase
+import com.mo.domain.usecases.db.studenttosubject.GetStudentsToSubjectUseCase
+import com.mo.domain.usecases.db.studenttosubject.GetStudentsToSubjectUseCaseImpl
+import com.mo.domain.usecases.db.subject.*
 import com.mo.domain.usecases.db.subject.AddSubjectToDBUseCaseImpl
-import com.mo.domain.usecases.db.subject.GetSubjectsFromDBUseCase
 import com.mo.domain.usecases.db.subject.GetSubjectsFromDBUseCaseImpl
 import com.mo.domain.usecases.validation.student.*
 import com.mo.domain.usecases.validation.student.ValidateStudentNameUseCaseImpl
@@ -53,5 +54,13 @@ val useCaseModule = module {
 
     single<GetSubjectsFromDBUseCase> {
         GetSubjectsFromDBUseCaseImpl(get())
+    }
+
+    single<GetSubjectFromDBUseCase> {
+        GetSubjectFromDBUseCaseImpl(get())
+    }
+
+    single<GetStudentsToSubjectUseCase> {
+        GetStudentsToSubjectUseCaseImpl(get(), get(), get())
     }
 }

@@ -8,7 +8,8 @@ import com.mo.data.models.Subject
 import com.mo.dziennikocen.databinding.ItemRecylerViewBinding
 import com.mo.dziennikocen.mappers.DayOfWeekToStringMapperImpl
 
-class SubjectsAdapter : RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
+class SubjectsAdapter(val onItemClick: (String) -> Unit) :
+    RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
 
     private val listSubjects = mutableListOf<Subject>()
 
@@ -42,6 +43,10 @@ class SubjectsAdapter : RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listSubjects[position])
+
+        holder.binding.root.setOnClickListener {
+            onItemClick(listSubjects[position].name)
+        }
     }
 
     override fun getItemCount(): Int = listSubjects.size

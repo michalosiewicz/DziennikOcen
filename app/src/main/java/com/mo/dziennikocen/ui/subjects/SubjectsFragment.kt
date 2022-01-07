@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.mo.dziennikocen.R
@@ -32,6 +33,16 @@ class SubjectsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        subjectsViewModel.subjectDetailsOpen.observe(viewLifecycleOwner) { name ->
+            name?.let { nameNoNull ->
+                val bundle = bundleOf("name" to nameNoNull)
+                findNavController().navigate(
+                    R.id.action_subjectsFragment_to_subjectDetailsFragment,
+                    bundle
+                )
+            }
+        }
 
         binding.addButton.setOnClickListener {
             findNavController().navigate(R.id.action_subjectsFragment_to_createSubjectFragment)
