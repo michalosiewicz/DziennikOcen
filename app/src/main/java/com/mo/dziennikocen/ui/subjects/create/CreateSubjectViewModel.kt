@@ -8,16 +8,14 @@ import com.mo.data.models.Times
 import com.mo.domain.usecases.db.subject.AddSubjectToDBUseCase
 import com.mo.domain.usecases.validation.subject.ValidateSubjectNameUseCase
 import com.mo.domain.usecases.validation.subject.ValidateSubjectTimesUseCase
-import com.mo.dziennikocen.constants.Constants
 import com.mo.dziennikocen.constants.Constants.CORRECT_SUBJECT_ADD
 import com.mo.dziennikocen.constants.Constants.EMPTY_STRING
-import com.mo.dziennikocen.constants.Constants.TIME_START_VALUE
+import com.mo.dziennikocen.constants.Constants.ZERO
 import com.mo.dziennikocen.extensions.changeVisibility
 import com.mo.dziennikocen.extensions.result
 import com.mo.dziennikocen.mappers.StringToDayOfWeekMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.DayOfWeek
 import java.time.LocalTime
 
 class CreateSubjectViewModel(
@@ -32,10 +30,10 @@ class CreateSubjectViewModel(
     val subjectNameVisibility = MutableLiveData(View.VISIBLE)
     val subjectTimesVisibility = MutableLiveData(View.VISIBLE)
 
-    val hourStart = MutableLiveData(TIME_START_VALUE)
-    val minuteStart = MutableLiveData(TIME_START_VALUE)
-    val hourEnd = MutableLiveData(TIME_START_VALUE)
-    val minuteEnd = MutableLiveData(TIME_START_VALUE)
+    val hourStart = MutableLiveData(ZERO)
+    val minuteStart = MutableLiveData(ZERO)
+    val hourEnd = MutableLiveData(ZERO)
+    val minuteEnd = MutableLiveData(ZERO)
 
     private val _createSubjectSuccess = MutableLiveData<String>()
     val createSubjectSuccess: LiveData<String>
@@ -79,12 +77,12 @@ class CreateSubjectViewModel(
         val result = validateSubjectTimesUseCase.invoke(
             Times(
                 LocalTime.of(
-                    hourStart.value ?: TIME_START_VALUE,
-                    minuteStart.value ?: TIME_START_VALUE,
+                    hourStart.value ?: ZERO,
+                    minuteStart.value ?: ZERO,
                 ),
                 LocalTime.of(
-                    hourEnd.value ?: TIME_START_VALUE,
-                    minuteEnd.value ?: TIME_START_VALUE,
+                    hourEnd.value ?: ZERO,
+                    minuteEnd.value ?: ZERO,
                 )
             )
         ).result()
@@ -97,12 +95,12 @@ class CreateSubjectViewModel(
             subjectName.value?.trim() ?: EMPTY_STRING,
             stringToDayOfWeekMapper.map(dayOfWeek),
             LocalTime.of(
-                hourStart.value ?: TIME_START_VALUE,
-                minuteStart.value ?: TIME_START_VALUE,
+                hourStart.value ?: ZERO,
+                minuteStart.value ?: ZERO,
             ),
             LocalTime.of(
-                hourEnd.value ?: TIME_START_VALUE,
-                minuteEnd.value ?: TIME_START_VALUE,
+                hourEnd.value ?: ZERO,
+                minuteEnd.value ?: ZERO,
             )
         )
         viewModelScope.launch(Dispatchers.IO) {

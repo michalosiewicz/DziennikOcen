@@ -9,6 +9,7 @@ import com.mo.data.models.StudentToSubject
 import com.mo.domain.usecases.db.studenttosubject.AddStudentsToSubjectUseCase
 import com.mo.domain.usecases.db.studenttosubject.GetStudentsNotInSubjectUseCase
 import com.mo.dziennikocen.constants.Constants.CORRECT_STUDENTS_ADD
+import com.mo.dziennikocen.constants.Constants.ZERO
 import com.mo.dziennikocen.ui.adapters.StudentsNotInSubjectAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,7 +55,7 @@ class AddStudentsToSubjectViewModel(
             studentsSelectedList.forEach { studentNumber ->
                 studentsToSubjectList.add(
                     StudentToSubject(
-                        0,
+                        ZERO,
                         studentNumber,
                         subjectName
                     )

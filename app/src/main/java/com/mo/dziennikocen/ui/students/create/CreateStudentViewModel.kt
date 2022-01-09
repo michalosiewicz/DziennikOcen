@@ -9,7 +9,6 @@ import com.mo.domain.usecases.db.student.AddStudentToDBUseCase
 import com.mo.domain.usecases.validation.student.ValidateStudentNameUseCase
 import com.mo.domain.usecases.validation.student.ValidateStudentNumberUseCase
 import com.mo.domain.usecases.validation.student.ValidateStudentSecondNameUseCase
-import com.mo.dziennikocen.R
 import com.mo.dziennikocen.constants.Constants.CORRECT_STUDENT_ADD
 import com.mo.dziennikocen.constants.Constants.EMPTY_STRING
 import com.mo.dziennikocen.extensions.changeVisibility
