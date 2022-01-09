@@ -1,18 +1,23 @@
 package com.mo.dziennikocen.ui.subjects.create
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.mo.dziennikocen.R
 import com.mo.dziennikocen.databinding.FragmentCreateSubjectBinding
-import com.mo.dziennikocen.extensions.daysOfWeekAdapter
+import com.mo.dziennikocen.extensions.spinnerAdapter
 import com.mo.dziennikocen.providers.snackbar.SnackBarProvider
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.core.content.ContextCompat.getSystemService
 
 class CreateSubjectFragment : Fragment() {
 
@@ -39,7 +44,7 @@ class CreateSubjectFragment : Fragment() {
         binding.timePickerStart.setIs24HourView(true)
         binding.timePickerEnd.setIs24HourView(true)
 
-        binding.daysSpinner.adapter = requireActivity().daysOfWeekAdapter()
+        binding.daysSpinner.adapter = requireActivity().spinnerAdapter(R.array.days_of_week)
 
         binding.subjectCreate.setOnClickListener {
             viewModel.addSubject(binding.daysSpinner.selectedItem.toString())
@@ -55,6 +60,14 @@ class CreateSubjectFragment : Fragment() {
         viewModel.createSubjectError.observe(viewLifecycleOwner) {
             activity?.let { activity ->
                 snackBarProvider.errorSnackBar(it, activity)
+            }
+        }
+
+        binding.subjectName.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val imm: InputMethodManager =
+                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
         }
     }

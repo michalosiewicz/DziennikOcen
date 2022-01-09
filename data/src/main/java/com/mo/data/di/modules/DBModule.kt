@@ -23,6 +23,10 @@ val dbModule = module {
     single {
         get<TeacherAssistantDataBase>().studentToSubjectDao()
     }
+
+    single {
+        get<TeacherAssistantDataBase>().gradeDao()
+    }
 }
 
 private fun getDB(context: Context) =

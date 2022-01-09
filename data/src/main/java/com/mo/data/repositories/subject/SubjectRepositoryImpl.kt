@@ -29,4 +29,9 @@ internal class SubjectRepositoryImpl(
 
     override suspend fun getSubjectFromDB(subjectName: String): State<Subject> =
         State.Success(subjectEntityMapper.map(subjectDao.getSubject(subjectName)))
+
+    override suspend fun deleteAllSubjects(): State<Unit> {
+        subjectDao.deleteAllSubjects()
+        return State.Success(Unit)
+    }
 }

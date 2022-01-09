@@ -1,9 +1,6 @@
 package com.mo.data.db.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.mo.data.db.models.StudentEntity
 
 @Dao
@@ -14,4 +11,10 @@ interface StudentDao {
 
     @Query("SELECT * FROM studententity")
     suspend fun getStudents(): List<StudentEntity>
+
+    @Query("SELECT * FROM studententity WHERE studentNumber=:studentNumber")
+    suspend fun getStudent(studentNumber: String): StudentEntity
+
+    @Query("DELETE FROM studententity")
+    suspend fun deleteAllStudents()
 }

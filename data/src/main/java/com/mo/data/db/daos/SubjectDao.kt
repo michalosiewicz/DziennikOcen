@@ -1,9 +1,6 @@
 package com.mo.data.db.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.mo.data.db.models.SubjectEntity
 
 @Dao
@@ -17,4 +14,7 @@ interface SubjectDao {
 
     @Query("SELECT * FROM subjectentity WHERE name = :subjectName")
     suspend fun getSubject(subjectName: String): SubjectEntity
+
+    @Query("DELETE FROM subjectentity")
+    suspend fun deleteAllSubjects()
 }

@@ -1,11 +1,17 @@
 package com.mo.domain.di.modules
 
-import com.mo.domain.usecases.db.student.AddStudentToDBUseCase
+import com.mo.domain.usecases.db.DeleteAllRecordsUseCase
+import com.mo.domain.usecases.db.DeleteAllRecordsUseCaseImpl
+import com.mo.domain.usecases.db.grade.AddGradeUseCase
+import com.mo.domain.usecases.db.grade.AddGradeUseCaseImpl
+import com.mo.domain.usecases.db.grade.GetGradesOfStudentUseCase
+import com.mo.domain.usecases.db.grade.GetGradesOfStudentUseCaseImpl
+import com.mo.domain.usecases.db.student.*
 import com.mo.domain.usecases.db.student.AddStudentToDBUseCaseImpl
-import com.mo.domain.usecases.db.student.GetStudentsFromDBUseCase
-import com.mo.domain.usecases.db.student.GetStudentsFromDBUseCaseImpl
-import com.mo.domain.usecases.db.studenttosubject.GetStudentsToSubjectUseCase
-import com.mo.domain.usecases.db.studenttosubject.GetStudentsToSubjectUseCaseImpl
+import com.mo.domain.usecases.db.student.GetAllStudentsFromDBUseCaseImpl
+import com.mo.domain.usecases.db.studenttosubject.*
+import com.mo.domain.usecases.db.studenttosubject.AddStudentsToSubjectUseCaseImpl
+import com.mo.domain.usecases.db.studenttosubject.GetStudentsNotInSubjectUseCaseImpl
 import com.mo.domain.usecases.db.subject.*
 import com.mo.domain.usecases.db.subject.AddSubjectToDBUseCaseImpl
 import com.mo.domain.usecases.db.subject.GetSubjectsFromDBUseCaseImpl
@@ -44,8 +50,8 @@ val useCaseModule = module {
         AddStudentToDBUseCaseImpl(get())
     }
 
-    single<GetStudentsFromDBUseCase> {
-        GetStudentsFromDBUseCaseImpl(get())
+    single<GetAllStudentsFromDBUseCase> {
+        GetAllStudentsFromDBUseCaseImpl(get())
     }
 
     single<AddSubjectToDBUseCase> {
@@ -60,7 +66,39 @@ val useCaseModule = module {
         GetSubjectFromDBUseCaseImpl(get())
     }
 
+    single<GetStudentsNotInSubjectUseCase> {
+        GetStudentsNotInSubjectUseCaseImpl(get(), get(), get())
+    }
+
+    single<AddStudentsToSubjectUseCase> {
+        AddStudentsToSubjectUseCaseImpl(get())
+    }
+
     single<GetStudentsToSubjectUseCase> {
-        GetStudentsToSubjectUseCaseImpl(get(), get(), get())
+        GetStudentsToSubjectUseCaseImpl(get())
+    }
+
+    single<GetStudentsFromDBUseCase> {
+        GetStudentsFromDBUseCaseImpl(get())
+    }
+
+    single<GetStudentToSubjectFromDBUseCase> {
+        GetStudentToSubjectFromDBUseCaseImpl(get())
+    }
+
+    single<GetStudentFromDBUseCase> {
+        GetStudentFromDBUseCaseImpl(get())
+    }
+
+    single<AddGradeUseCase> {
+        AddGradeUseCaseImpl(get())
+    }
+
+    single<GetGradesOfStudentUseCase> {
+        GetGradesOfStudentUseCaseImpl(get())
+    }
+
+    single<DeleteAllRecordsUseCase> {
+        DeleteAllRecordsUseCaseImpl(get(), get(), get(), get())
     }
 }

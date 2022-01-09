@@ -9,7 +9,6 @@ import com.mo.domain.usecases.db.subject.GetSubjectsFromDBUseCase
 import com.mo.dziennikocen.ui.adapters.SubjectsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.parameter.parametersOf
 
 class SubjectsViewModel(
     private val getSubjectsFromDBUseCase: GetSubjectsFromDBUseCase

@@ -6,11 +6,12 @@ import com.mo.data.models.StudentToSubject
 
 internal interface StudentToSubjectMapper : Mapper<StudentToSubject, StudentToSubjectEntity>
 
-internal class StudentToSubjectMapperImpl : StudentToSubjectMapper {
+internal class StudentToSubjectMapperImpl :
+    StudentToSubjectMapper {
 
     override fun map(input: StudentToSubject): StudentToSubjectEntity =
         StudentToSubjectEntity(
-            input.id,
+            0,
             input.studentNumber,
             input.subjectName
         )

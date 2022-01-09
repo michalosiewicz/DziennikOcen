@@ -61,9 +61,16 @@
             <ImageButton
                 android:id="@+id/addButton"
                 style="@style/ItemActionBar.Image"
-                android:src="@drawable/ic_baseline_person_add_24" />
+                android:src="@drawable/ic_baseline_group_add_24" />
 
         </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/studentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adapter="@{viewModel.studentsInSubjectAdapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 

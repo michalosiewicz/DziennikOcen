@@ -1,5 +1,8 @@
 package com.mo.dziennikocen.di.modules
 
+import com.mo.dziennikocen.ui.deletedata.DeleteDataViewModel
+import com.mo.dziennikocen.ui.grades.AddGradeDialogViewModel
+import com.mo.dziennikocen.ui.menu.MenuViewModel
 import com.mo.dziennikocen.ui.students.StudentsViewModel
 import com.mo.dziennikocen.ui.students.create.CreateStudentViewModel
 import com.mo.dziennikocen.ui.subjects.SubjectsViewModel
@@ -28,10 +31,28 @@ val viewModelsModule = module {
     }
 
     viewModel { parameters ->
-        SubjectDetailsViewModel(get(), get(), subjectName = parameters[0])
+        SubjectDetailsViewModel(get(), get(), get(), get(), get(), subjectName = parameters[0])
     }
 
     viewModel { parameters ->
-        AddStudentsToSubjectViewModel(get(), subjectName = parameters[0])
+        AddStudentsToSubjectViewModel(get(), get(), subjectName = parameters[0])
+    }
+
+    viewModel { parameters ->
+        AddGradeDialogViewModel(
+            get(),
+            get(),
+            get(),
+            studentNumber = parameters[0],
+            subjectName = parameters[1]
+        )
+    }
+
+    viewModel {
+        MenuViewModel()
+    }
+
+    viewModel {
+        DeleteDataViewModel(get())
     }
 }

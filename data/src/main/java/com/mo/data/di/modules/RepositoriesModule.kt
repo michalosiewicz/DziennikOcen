@@ -1,5 +1,7 @@
 package com.mo.data.di.modules
 
+import com.mo.data.repositories.grade.GradeRepository
+import com.mo.data.repositories.grade.GradeRepositoryImpl
 import com.mo.data.repositories.student.StudentRepository
 import com.mo.data.repositories.student.StudentRepositoryImpl
 import com.mo.data.repositories.studenttosubject.StudentToSubjectRepository
@@ -11,7 +13,7 @@ import org.koin.dsl.module
 val repositoriesModule = module {
 
     factory<StudentRepository> {
-        StudentRepositoryImpl(get(), get(), get())
+        StudentRepositoryImpl(get(), get(), get(), get())
     }
 
     factory<SubjectRepository> {
@@ -19,6 +21,10 @@ val repositoriesModule = module {
     }
 
     factory<StudentToSubjectRepository> {
-        StudentToSubjectRepositoryImpl(get(), get(), get())
+        StudentToSubjectRepositoryImpl(get(), get(), get(), get())
+    }
+
+    factory<GradeRepository> {
+        GradeRepositoryImpl(get(), get(), get())
     }
 }

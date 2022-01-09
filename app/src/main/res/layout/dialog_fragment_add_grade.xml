@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.grades.AddGradeDialogFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mo.dziennikocen.ui.grades.AddGradeDialogViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            style="@style/ActionBar"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                style="@style/ItemActionBar.Title"
+                android:text="@{viewModel.studentName}"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <Spinner
+            android:id="@+id/gradesSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="16dp" />
+
+        <Button
+            android:id="@+id/addGrade"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@string/grade_add" />
+
+    </LinearLayout>
+
+</layout>

@@ -1,21 +1,18 @@
 package com.mo.dziennikocen.ui.adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.mo.data.models.Student
-import com.mo.dziennikocen.databinding.ItemAddStudentToSubjectBinding
+import com.mo.dziennikocen.databinding.ItemStudentWithGradesBinding
 
 class StudentsToSubjectAdapter(
-    val onItemClick: (List<String>) -> Unit
-) :
-    RecyclerView.Adapter<StudentsToSubjectAdapter.ViewHolder>() {
+    val onItemClick: (String) -> Unit,
+    val grades: (String) -> List<Double>
+) : RecyclerView.Adapter<StudentsToSubjectAdapter.ViewHolder>() {
 
     private val listStudents = mutableListOf<Student>()
-    private val studentsSelected = mutableListOf<String>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun addNewItems(students: List<Student>) {
@@ -24,53 +21,37 @@ class StudentsToSubjectAdapter(
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: ItemAddStudentToSubjectBinding) :
+    class ViewHolder(val binding: ItemStudentWithGradesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(student: Student) {
+        fun bind(student: Student, grades: List<Double>) {
             val studentName = student.studentSecondName + " " + student.studentName
             val studentNumber = "Numer albumu : " + student.studentNumber
-            binding.firstText.text = studentName
-            binding.secondText.text = studentNumber
+            var gradesString = ""
+            grades.forEach { grade ->
+                gradesString += "$grade, "
+            }
+            gradesString = gradesString.dropLast(2)
+            binding.name.text = studentName
+            binding.number.text = studentNumber
+            binding.grades.text = gradesString
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemAddStudentToSubjectBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            ItemStudentWithGradesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listStudents[position])
+        holder.bind(listStudents[position], grades(listStudents[position].studentNumber))
 
-        holder.binding.root.setOnClickListener {
-            holder.binding.checkBox.isChecked = !holder.binding.checkBox.isChecked
-            onBindClick(holder.binding, position)
-        }
-
-        holder.binding.checkBox.setOnClickListener {
-            onBindClick(holder.binding, position)
+        holder.binding.addGradeButton.setOnClickListener {
+            onItemClick(listStudents[position].studentNumber)
         }
     }
 
     override fun getItemCount(): Int = listStudents.size
-
-    private fun onBindClick(binding: ItemAddStudentToSubjectBinding, position: Int) {
-        if (binding.checkBox.isChecked) {
-            studentsSelected.add(listStudents[position].studentNumber)
-            Log.d("Test", studentsSelected.toString())
-        } else {
-            studentsSelected.remove(listStudents[position].studentNumber)
-            Log.d("Test", studentsSelected.toString())
-
-        }
-        onItemClick(studentsSelected)
-    }
 }

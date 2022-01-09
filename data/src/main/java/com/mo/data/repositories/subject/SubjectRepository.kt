@@ -10,4 +10,6 @@ interface SubjectRepository {
     suspend fun getSubjectsFromDB(): State<List<Subject>>
 
     suspend fun getSubjectFromDB(subjectName: String): State<Subject>
+
+    suspend fun deleteAllSubjects(): State<Unit>
 }

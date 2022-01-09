@@ -94,7 +94,7 @@ class CreateSubjectViewModel(
 
     fun addSubject(dayOfWeek: String) {
         val subject = Subject(
-            subjectName.value ?: EMPTY_STRING,
+            subjectName.value?.trim() ?: EMPTY_STRING,
             stringToDayOfWeekMapper.map(dayOfWeek),
             LocalTime.of(
                 hourStart.value ?: TIME_START_VALUE,

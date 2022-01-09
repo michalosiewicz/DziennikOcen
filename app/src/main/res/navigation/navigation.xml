@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_menuFragment_to_studentsFragment"
             app:destination="@id/studentsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_deleteDataDialogFragment"
+            app:destination="@id/deleteDataDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/subjectsFragment"
@@ -68,10 +71,38 @@
         <action
             android:id="@+id/action_subjectDetailsFragment_to_addStudentsToSubjectFragment"
             app:destination="@id/addStudentsToSubjectFragment" />
+        <action
+            android:id="@+id/action_subjectDetailsFragment_to_subjectsFragment"
+            app:destination="@id/subjectsFragment" />
+        <action
+            android:id="@+id/action_subjectDetailsFragment_to_addGradeFragment"
+            app:destination="@id/addGradeFragment" />
     </fragment>
     <fragment
         android:id="@+id/addStudentsToSubjectFragment"
         android:name="com.mo.dziennikocen.ui.subjects.addstudents.AddStudentsToSubjectFragment"
         android:label="fragment_add_students_to_subject"
-        tools:layout="@layout/fragment_add_students_to_subject" />
+        tools:layout="@layout/fragment_add_students_to_subject">
+        <action
+            android:id="@+id/action_addStudentsToSubjectFragment_to_subjectDetailsFragment"
+            app:destination="@id/subjectDetailsFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/addGradeFragment"
+        android:name="com.mo.dziennikocen.ui.grades.AddGradeDialogFragment"
+        android:label="fragment_add_grade"
+        tools:layout="@layout/dialog_fragment_add_grade">
+        <action
+            android:id="@+id/action_addGradeFragment_to_subjectDetailsFragment"
+            app:destination="@id/subjectDetailsFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/deleteDataDialogFragment"
+        android:name="com.mo.dziennikocen.ui.deletedata.DeleteDataDialogFragment"
+        android:label="fragment_delete_data_dialog"
+        tools:layout="@layout/fragment_delete_data_dialog" >
+        <action
+            android:id="@+id/action_deleteDataDialogFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </dialog>
 </navigation>
