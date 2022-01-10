@@ -8,4 +8,5 @@ object Constants {
     const val CORRECT_SUBJECT_ADD = "Przedmiot został pomyślnie dodany"
     const val CORRECT_STUDENTS_ADD = "Studenci zostali pomyślnie dodani"
     const val CORRECT_GRADE_ADD = "Ocena została pomyślnie dodana"
+    const val CORRECT_DELETE_DATA="Dane zostały usunięte"
 }

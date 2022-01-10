@@ -23,7 +23,8 @@
     <fragment
         android:id="@+id/subjectsFragment"
         android:name="com.mo.dziennikocen.ui.subjects.SubjectsFragment"
-        android:label="SubjectsFragment">
+        android:label="SubjectsFragment"
+        tools:layout="@layout/fragment_subjects">
         <action
             android:id="@+id/action_subjectsFragment_to_createSubjectFragment"
             app:destination="@id/createSubjectFragment" />
@@ -37,7 +38,8 @@
     <fragment
         android:id="@+id/studentsFragment"
         android:name="com.mo.dziennikocen.ui.students.StudentsFragment"
-        android:label="StudentsFragment">
+        android:label="StudentsFragment"
+        tools:layout="@layout/fragment_students">
         <action
             android:id="@+id/action_studentsFragment_to_createStudentFragment"
             app:destination="@id/createStudentFragment" />
@@ -100,7 +102,7 @@
         android:id="@+id/deleteDataDialogFragment"
         android:name="com.mo.dziennikocen.ui.deletedata.DeleteDataDialogFragment"
         android:label="fragment_delete_data_dialog"
-        tools:layout="@layout/fragment_delete_data_dialog" >
+        tools:layout="@layout/fragment_delete_data_dialog">
         <action
             android:id="@+id/action_deleteDataDialogFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
