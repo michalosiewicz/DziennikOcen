@@ -8,7 +8,7 @@ Funkcjonalności aplikacji:
 - dodawanie studentom ocen z przedmitów
 - usunięcie wszystkich rekordów z aplikacji
 
-Wszystkie rekordy zapisują się w bazie danych na telefonie(ROOM)
+Wszystkie rekordy zapisują się w bazie danych na telefonie(ROOM).
 
 Technologie:
 - Koin (DI)
